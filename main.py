@@ -1,9 +1,11 @@
+#importing details from spy_details.py
 from spy_details import Spy,spy, friends, chatmessage
+#importing libraries
 from steganography.steganography import Steganography
 from datetime import datetime
 from termcolor import colored, cprint
 
-
+#a function for adding a friend
 def add_friend():
     new_friend = Spy('', '', 0, 0.0)
     new_friend.name = raw_input("please add your friends name : ")
@@ -16,7 +18,7 @@ def add_friend():
         print("sorry! invalid entry. we can't add a spy with the details you provided. please try again later. ")
     return len(friends)
 
-
+#function for selecting a friend
 def select_a_friend():
     number = 0
     for friend in friends:
@@ -30,7 +32,7 @@ def select_a_friend():
     else:
         return select_friend_postion
 
-
+#function for sending a message
 def send_a_message():
     select_friend = select_a_friend()
     original_image = raw_input("what is the name ofthe image")
@@ -47,7 +49,7 @@ def send_a_message():
         friends[select_friend].chat.append(chats)
         print("your secret message is ready.")
 
-
+#function for reading a message
 def read_a_message():
     sender = select_a_friend()
     output_path = raw_input("what is the name of the image.")
@@ -58,7 +60,7 @@ def read_a_message():
         print("you will receive help soon...")
     print("your secret message is saved.")
 
-
+#function for reading chat
 def read_chat():
     read_for = select_a_friend()
     for chats in friends[read_for].chat:
@@ -71,12 +73,12 @@ def read_chat():
             print(text1)
             print colored(friends[read_for].name, 'green', 'on_red'), chats.message
 
-
+#program starts
 print("welcome to spy chat application.")
 question = "continue as " + spy.salutation + " " + spy.name + "(Y/N)?"
 existing = raw_input(question)
-status_messages = ['my name is bond,james bond', 'shaken', 'die another day']
-
+status_messages = ['busy', 'stirred', 'despacito']
+#function for adding status
 def add_status_message(current_status_message):
     if current_status_message != None:
         print("your current status message is : ") + current_status_message + '\n'
@@ -99,7 +101,7 @@ def add_status_message(current_status_message):
                 updated_message = status_messages[message_selection - 1]
                 return updated_message
 
-
+#function to start chat
 def start_chat(spy_name, spy_age, spy_rating):
     current_status_message = None
     show_menu = True
@@ -132,6 +134,7 @@ def start_chat(spy_name, spy_age, spy_rating):
         else:
             print("please choose an option.")
 
+#some functions for asking spy details
 
 def ask_name():
     spy_name = raw_input("please enter your name: ")
@@ -181,11 +184,11 @@ def ask_rating():
     else:
         return "%.1f we can always need someone in office." % (spy_rating)
 
-
+#for display user details
 def display(name, age, rating):
     return ("Welcome %s. Your age is %s. And You are rated as : %s ") % (name, str(age), str(rating))
 
-
+#checking if user wants to continue with default user or not
 if (existing.upper() == "Y"):
     print("authentication complete. welcome %s %s .") % (spy.salutation, spy.name)
     start_chat(spy.name, spy.age, spy.rating)
